@@ -199,5 +199,172 @@ class FirstFragment : Fragment() {
     }
 }
 ```
+### 修改fragment_second.xml中的代码如下：
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenBackground2"
+    tools:context=".SecondFragment">
+
+    <TextView
+        android:id="@+id/textview_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="@string/random_heading"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_header"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textview_random"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R"
+        android:textColor="@android:color/white"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_second"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_header"
+        app:layout_constraintVertical_bias="0.45" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+### 修改nav_graph.xml文件：
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.myapplication.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.myapplication.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <argument
+            android:name="myArg"
+            app:argType="integer" />
+    </fragment>
+</navigation>
+```
+### 修改build.gradle(Project:My_Application)中的代码如下：
+```kotlin
+plugins {
+    id 'com.android.application' version '7.3.0' apply false
+    id 'com.android.library' version '7.3.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id 'androidx.navigation.safeargs.kotlin' version '2.5.0-alpha01' apply false
+}
+```
+### 修改build.gradle(Module:My_Application)中的代码如下：
+```kotlin
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs'
+}
+```
+### 修改SecondFragment中的代码如下：
+```kotlin
+package com.example.myapplication
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import com.example.myapplication.databinding.FragmentSecondBinding
+import androidx.navigation.fragment.navArgs
+
+
+/**
+ * A simple [Fragment] subclass as the second destination in the navigation.
+ */
+class SecondFragment : Fragment() {
+
+    private var _binding: FragmentSecondBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
+    val args: SecondFragmentArgs by navArgs()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val count = args.myArg
+        val countText = getString(R.string.random_heading, count)
+        view.findViewById<TextView>(R.id.textview_header).text = countText
+        val random = java.util.Random()
+        var randomNumber = 0
+        if (count > 0) {
+            randomNumber = random.nextInt(count + 1)
+        }
+        view.findViewById<TextView>(R.id.textview_random).text = randomNumber.toString()
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
+```
+### 运行结果如下：
+![1]()
+![2]()
+![3]()
+![4]()
 
 
