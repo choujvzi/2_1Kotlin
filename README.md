@@ -1,7 +1,7 @@
 # 2_1Kotlin
 ## 实现第一个Kotlin应用
 ### 修改fragment_first.xml中的代码如下：
-```java
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -61,4 +61,39 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
-![第一界面]()
+### 修改strings.xml中的代码如下：
+```kotlin
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="random_button_text">Random</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">0</string>
+    <string name="random_heading">Here is a random number between 0 and %d.</string>
+    <string name="toast_button_text">Toast</string>
+    <string name="count_button_text">Count</string>
+</resources>
+```
+### 修改colors.xml中的代码如下：
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="screenBackground">#2196F3</color>
+    <color name="buttonBackground">#BBDEFB</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="screenBackground2">#26C6DA</color>
+</resources>
+```
+
+
