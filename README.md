@@ -364,7 +364,7 @@ class SecondFragment : Fragment() {
 ### 运行结果如下：
 ![1](https://github.com/choujvzi/2_1Kotlin/blob/master/screenshots/Screenshot%202023-04-30%20162044.jpg)
 ![2](https://github.com/choujvzi/2_1Kotlin/blob/master/screenshots/Screenshot%202023-04-30%20162137.jpg)
-![3]()
-![4]()
+![3](https://github.com/choujvzi/2_1Kotlin/blob/master/screenshots/Screenshot%202023-04-30%20162157.jpg)
+![4](https://github.com/choujvzi/2_1Kotlin/blob/master/screenshots/Screenshot%202023-04-30%20162216.jpg)
 
 
